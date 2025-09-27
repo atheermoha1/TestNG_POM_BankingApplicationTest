@@ -50,7 +50,9 @@ public class C01_BankingApplicationTest {
             customerManagementPage.postCode.sendKeys(ConfigReader.getProperty("postcode"+i));
             customerManagementPage.addCustomerButton.click();
             Alert alert= wait.until(ExpectedConditions.alertIsPresent());
+           Assert.assertTrue(alert.getText().contains("Customer added successfully"),"Customer creation failed");
             alert.accept();
+
         }
         //open 5 accounts
         accountManagementPage.OpenAccountButton.click();
@@ -107,7 +109,6 @@ public class C01_BankingApplicationTest {
         int counter=10;
         for(int i=1;i<=5;i++){
          customerManagementPage.search.sendKeys((ConfigReader.getProperty("firstname"+i)));
-         Thread.sleep(3000);
          customerManagementPage.deleteCustomer.click();
          customerManagementPage.search.clear();
          counter--;
